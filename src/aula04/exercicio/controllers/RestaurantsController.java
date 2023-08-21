@@ -42,7 +42,7 @@ public class RestaurantsController {
 
         /*getStringNextLine("Restaurante cadastrado com sucesso!");
         getStringNextLine("");*/
-        System.out.println("Restaurante cadastrado com sucesso!");
+        System.out.println("\nRestaurante cadastrado com sucesso!");
         // System.out.println();
     }
     public void addNewRestaurant(RestaurantEntity newRestaurant) {

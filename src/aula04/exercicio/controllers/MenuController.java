@@ -48,6 +48,7 @@ public class MenuController {
                 // sc.nextLine();
             } catch (InputMismatchException e) {
                 getStringNextLine("Opção inválida! Por favor, insira um número conforme o menu.");
+                System.out.println();
                 option = getInt("Escolha uma opção: ");
                 //System.out.println("Opção inválida! Por favor, insira um número conforme o menu.");
                 
@@ -73,16 +74,24 @@ public class MenuController {
             case 3:
                 System.out.println("---- Cadastre um prato ---- \n");
 
-                // RestaurantEntity restaurant = this.restaurantsController.getRestaurantByNameView();
                 restaurant = this.restaurantsController.getRestaurantByNameView();
+
+                if (restaurant == null) {
+                    System.out.println("\nRestaurante infomado não cadastrado!");
+                    break;
+                }
 
                 this.foodsController.addNewFoodView(restaurant.getId());
                 break;
             case 4:
-                System.out.println("---- Lista pratos de um restaurante ---- \n");
+                System.out.println("\n---- Lista pratos de um restaurante ---- \n");
 
-                // RestaurantEntity restaurant = this.restaurantsController.getRestaurantByNameView();
                 restaurant = this.restaurantsController.getRestaurantByNameView();
+
+                if (restaurant == null) {
+                    System.out.println("\nRestaurante informado não cadastrado!");
+                    break;
+                }
 
                 this.foodsController.getAllFoodInRestaurantView(restaurant.getId());
                 break;

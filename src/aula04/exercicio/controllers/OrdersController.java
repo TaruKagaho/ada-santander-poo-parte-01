@@ -26,9 +26,24 @@ public class OrdersController {
 
     public void addNewOrderView() {
         long clientId = this.clientsController.addClientView().getId();
-        long restaurantId = this.restaurantsController.getRestaurantByNameView().getId();
-        long foodId = this.foodsController.getFoodByNameAndRestaurantIdView(restaurantId).getId();
+        RestaurantEntity restaurant = this.restaurantsController.getRestaurantByNameView();
 
+        if (restaurant == null) {
+            System.out.println("Restaurante informado não cadastrado!");
+
+            return;
+        }
+
+        long restaurantId = restaurant.getId();
+        FoodEntity food = this.foodsController.getFoodByNameAndRestaurantIdView(restaurantId);
+
+        if (food == null) {
+            System.out.println("Prato informado não cadastrado!");
+
+            return;
+        }
+
+        long foodId = food.getId();
         OrderEntity newOrder = new OrderEntity(clientId, restaurantId, foodId);
 
         this.ordersService.addOrder(newOrder);

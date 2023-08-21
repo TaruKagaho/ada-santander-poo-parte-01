@@ -26,8 +26,8 @@ public class FoodsController {
             }
         }
 
-        if (foodFound == null) {
-            System.out.println("Prato já cadastrado!");
+        if (foodFound != null) {
+            System.out.println("\nPrato já cadastrado!");
 
             return;
         }
@@ -55,7 +55,9 @@ public class FoodsController {
         List<FoodEntity> listOfFoodsAtRestaurant = this.foodsService.getAllFoodByRestaurantId(id);
 
         if (listOfFoodsAtRestaurant.isEmpty()) {
-            System.out.println("A lista de pratos do referido restaurante está vazia!");
+            System.out.println("\nA lista de pratos do referido restaurante está vazia!");
+
+            return null;
         }
 
         System.out.println("Lista de pratos do restaurente " + id);
@@ -71,7 +73,17 @@ public class FoodsController {
     }
 
     public FoodEntity getFoodByNameAndRestaurantIdView(long restaurantId) {
-        List<FoodEntity> listOfFoodsAtRestaurant = this.getAllFoodInRestaurantView(restaurantId);
+        List<FoodEntity> listOfFoodsAtRestaurant = this.getAllFoodInRestaurant(restaurantId);
+
+        /*if (listOfFoodsAtRestaurant == null) {
+            return null;
+        }*/
+        if (listOfFoodsAtRestaurant.isEmpty()) {
+            System.out.println("\nA lista de pratos do referido restaurante está vazia!");
+
+            return null;
+        }
+
         FoodEntity foodChoosed = null;
 
         String foodName = getStringNextLine("Digite o nome do prato escolhido:");
